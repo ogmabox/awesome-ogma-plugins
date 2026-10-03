@@ -31,8 +31,8 @@ const SHA256_RE = /^[0-9a-f]{64}$/
 // Accepted download URL patterns:
 // 1. GitHub Releases (preferred): https://github.com/KaijinLab/awesome-ogma-plugins/releases/download/<tag>/<plugin-id>.zip
 // 2. raw.githubusercontent.com (legacy): https://raw.githubusercontent.com/KaijinLab/awesome-ogma-plugins/master/plugins/<id>/<id>.zip
-const TRUSTED_DOWNLOAD_RELEASES_RE = /^https:\/\/github\.com\/KaijinLab\/awesome-ogma-plugins\/releases\/download\/[a-z][a-z0-9-]*-v\d+\.\d+\.\d+\/[a-z][a-z0-9-]*\.zip$/
-const TRUSTED_DOWNLOAD_RAW_RE = /^https:\/\/raw\.githubusercontent\.com\/KaijinLab\/awesome-ogma-plugins\/main\/plugins\/[a-z][a-z0-9-]*\/[a-z][a-z0-9-]*\.zip$/
+const TRUSTED_DOWNLOAD_RELEASES_RE = /^https:\/\/github\.com\/(?:ogmabox|KaijinLab)\/awesome-ogma-plugins\/releases\/download\/[a-z][a-z0-9-]*-v\d+\.\d+\.\d+\/[a-z][a-z0-9-]*\.zip$/
+const TRUSTED_DOWNLOAD_RAW_RE = /^https:\/\/raw\.githubusercontent\.com\/(?:ogmabox|KaijinLab)\/awesome-ogma-plugins\/(?:master|main)\/plugins\/[a-z][a-z0-9-]*\/[a-z][a-z0-9-]*\.zip$/
 
 let errors = []
 let warnings = []
@@ -91,12 +91,12 @@ for (let i = 0; i < registry.plugins.length; i++) {
     const isRaw = TRUSTED_DOWNLOAD_RAW_RE.test(plugin.download)
     if (!isReleases && !isRaw) {
       error(`${prefix}: download URL must be a GitHub Releases URL for this repository. ` +
-        `Expected format: https://github.com/KaijinLab/awesome-ogma-plugins/releases/download/<id>-v<version>/<id>.zip`)
+        `Expected format: https://github.com/ogmabox/awesome-ogma-plugins/releases/download/<id>-v<version>/<id>.zip`)
     }
 
     // If we have the ZIP locally (e.g., during CI after building), verify the hash
     if (isRaw && plugin.sha256 && SHA256_RE.test(plugin.sha256)) {
-      const urlPath = plugin.download.replace('https://raw.githubusercontent.com/KaijinLab/awesome-ogma-plugins/master/', '')
+      const urlPath = new URL(plugin.download).pathname.split('/').slice(4).join('/')
       const localZipPath = path.join(REPO_ROOT, urlPath)
       if (fs.existsSync(localZipPath)) {
         const zipBytes = fs.readFileSync(localZipPath)

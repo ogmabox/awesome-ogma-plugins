@@ -52,7 +52,7 @@ See [PLUGIN_SPEC.md](PLUGIN_SPEC.md) for the full manifest specification.
    - `LICENSE` -- any OSI-approved license
 3. **Do not build or commit a ZIP file.** The CI pipeline builds the ZIP automatically when your PR is merged and publishes it as a GitHub Release. You only need to submit source files.
 4. **Add your entry** to `plugins.json` with:
-   - `download` set to: `https://github.com/KaijinLab/awesome-ogma-plugins/releases/download/<your-plugin-id>-v<version>/<your-plugin-id>.zip`
+   - `download` set to: `https://github.com/ogmabox/awesome-ogma-plugins/releases/download/<your-plugin-id>-v<version>/<your-plugin-id>.zip`
    - `sha256` set to: `"pending"` -- CI computes and updates this automatically after merge
    - All other required fields filled in
 5. **Open a pull request.** CI validates:
@@ -79,7 +79,7 @@ Each entry in the `plugins` array must have these fields:
 | `description` | string | Yes | One or two sentences. No marketing language. |
 | `author` | string | Yes | Author name or GitHub username. |
 | `homepage` | string | Yes | URL to the plugin documentation or homepage. |
-| `download` | string | Yes | GitHub Releases URL for the plugin `.zip` file. Must be `https://github.com/KaijinLab/awesome-ogma-plugins/releases/download/<id>-v<version>/<id>.zip`. |
+| `download` | string | Yes | GitHub Releases URL for the plugin `.zip` file. Must be `https://github.com/ogmabox/awesome-ogma-plugins/releases/download/<id>-v<version>/<id>.zip`. |
 | `sha256` | string | Yes | SHA-256 hex digest of the ZIP file. Verified by Ogma before install. |
 | `tags` | string[] | Yes | At least one tag. See tag list below. |
 | `ogma_min_version` | string | Yes | Minimum Ogma version required (e.g. `1.0.0`). |
@@ -98,8 +98,8 @@ Each entry in the `plugins` array must have these fields:
   "version": "1.0.0",
   "description": "Scans responses for hardcoded API keys.",
   "author": "your-github-username",
-  "homepage": "https://github.com/KaijinLab/awesome-ogma-plugins/tree/main/plugins/my-plugin",
-  "download": "https://github.com/KaijinLab/awesome-ogma-plugins/releases/download/my-plugin-v1.0.0/my-plugin.zip",
+  "homepage": "https://github.com/ogmabox/awesome-ogma-plugins/tree/main/plugins/my-plugin",
+  "download": "https://github.com/ogmabox/awesome-ogma-plugins/releases/download/my-plugin-v1.0.0/my-plugin.zip",
   "sha256": "pending",
   "tags": ["security", "passive", "reconnaissance"],
   "ogma_min_version": "1.0.0",

@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://github.com/KaijinLab/awesome-ogma-plugins">
+  <a href="https://github.com/ogmabox/awesome-ogma-plugins">
     <img src=".github/banner.png" alt="Awesome Ogma Plugins" width="100%">
   </a>
 </p>
@@ -13,7 +13,7 @@
 <br/>
 
 [![License: CC0-1.0](https://img.shields.io/badge/License-CC0_1.0-lightgrey?style=for-the-badge)](http://creativecommons.org/publicdomain/zero/1.0/)
-[![Validate plugins.json](https://img.shields.io/github/actions/workflow/status/KaijinLab/awesome-ogma-plugins/validate.yml?style=for-the-badge&label=Registry)](https://github.com/KaijinLab/awesome-ogma-plugins/actions/workflows/validate.yml)
+[![Validate plugins.json](https://img.shields.io/github/actions/workflow/status/ogmabox/awesome-ogma-plugins/validate.yml?style=for-the-badge&label=Registry)](https://github.com/ogmabox/awesome-ogma-plugins/actions/workflows/validate.yml)
 
 <br/>
 
@@ -118,12 +118,14 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for the full requirements.
 
 ## Security Model
 
-All plugins are hosted directly in this repository. No external download links.
+Registry downloads are restricted to this repository and its previous KaijinLab location. No arbitrary external download links.
+
+The new `ogmabox/awesome-ogma-plugins` source repository is currently private. Ogma's existing public catalog and published package URLs remain at `KaijinLab/awesome-ogma-plugins` so installations do not require GitHub credentials. A private repository cannot replace the unauthenticated public catalog: make the new catalog/packages publicly accessible and migrate Ogma's catalog URL before retiring the old location.
 
 When Ogma installs a plugin from this registry:
 
-1. Ogma fetches `plugins.json` from this repository.
-2. Ogma downloads the ZIP from this repository -- not from the author's server.
+1. Ogma fetches `plugins.json` from the configured public registry location.
+2. Ogma downloads the ZIP from its approved repository URL -- not from the author's server.
 3. Ogma verifies the SHA-256 hash before extracting anything.
 4. If the hash does not match, installation stops.
 
