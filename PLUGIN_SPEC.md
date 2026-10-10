@@ -178,12 +178,12 @@ npm run build       # runs esbuild, outputs to dist/
 
 The esbuild command for a backend plugin:
 ```bash
-esbuild src/backend.ts --bundle --platform=neutral --format=iife --external:@kaijinlab/ogma-sdk --outfile=dist/backend.js
+esbuild src/backend.ts --bundle --platform=neutral --format=iife --external:@ogmabox/ogma-sdk --outfile=dist/backend.js
 ```
 
-`@kaijinlab/ogma-sdk` is available on the public npm registry:
+`@ogmabox/ogma-sdk` is available on the public npm registry:
 ```bash
-npm install --save-dev @kaijinlab/ogma-sdk
+npm install --save-dev @ogmabox/ogma-sdk
 ```
 
 ## Changelog

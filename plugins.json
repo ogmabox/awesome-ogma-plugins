@@ -8,7 +8,7 @@
       "version": "1.0.2",
       "description": "Counts intercepted HTTP requests. Reference plugin demonstrating the minimal Ogma plugin structure.",
       "author": "Ogma Plugins",
-      "homepage": "https://github.com/KaijinLab/awesome-ogma-plugins/tree/master/plugins/request-counter",
+      "homepage": "https://github.com/ogmabox/awesome-ogma-plugins/tree/master/plugins/request-counter",
       "download": "https://github.com/KaijinLab/awesome-ogma-plugins/releases/download/request-counter-v1.0.2/request-counter.zip",
       "sha256": "565d3e42115e97cc19dc732917a9812278fdd332adef3f20150ab13b7fbf8095",
       "tags": [
@@ -26,7 +26,7 @@
       "version": "1.0.2",
       "description": "Passively checks HTML responses for missing or weak security headers. Creates findings for each gap detected.",
       "author": "Ogma Plugins",
-      "homepage": "https://github.com/KaijinLab/awesome-ogma-plugins/tree/master/plugins/security-headers",
+      "homepage": "https://github.com/ogmabox/awesome-ogma-plugins/tree/master/plugins/security-headers",
       "download": "https://github.com/KaijinLab/awesome-ogma-plugins/releases/download/security-headers-v1.0.2/security-headers.zip",
       "sha256": "1bd67fb42d013bc27d113467cd462c9a8230ed57a92c14a6b53fed5ffba0b33d",
       "tags": [

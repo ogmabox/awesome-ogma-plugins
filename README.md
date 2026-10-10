@@ -8,7 +8,7 @@
 
 # Awesome Ogma Plugins
 
-### A curated registry of community plugins for [Ogma](https://ogma.kaijinlab.com).
+### A curated registry of community plugins for [Ogma](https://ogmabox.com).
 
 <br/>
 
@@ -89,7 +89,7 @@ For larger plugins, TypeScript gives you type checking and better IDE support.
 
 1. Create a plugin directory.
 2. Add `package.json`, `tsconfig.json`, and `src/backend.ts`.
-3. Install types: `npm install --save-dev @kaijinlab/ogma-sdk esbuild typescript`
+3. Install types: `npm install --save-dev @ogmabox/ogma-sdk esbuild typescript`
 4. Build: `npm run build` -- outputs to `dist/`.
 
 See the [security-headers plugin](plugins/security-headers) for a complete example. See [PLUGIN_SPEC.md](PLUGIN_SPEC.md) for the full API reference.

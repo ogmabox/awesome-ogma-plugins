@@ -6,7 +6,7 @@ await build({
   bundle: true,
   format: 'iife',
   platform: 'neutral',
-  external: ['@kaijinlab/ogma-sdk'],
+  external: ['@ogmabox/ogma-sdk'],
 })
 
 await build({
@@ -15,7 +15,7 @@ await build({
   bundle: true,
   format: 'iife',
   platform: 'neutral',
-  external: ['@kaijinlab/ogma-sdk'],
+  external: ['@ogmabox/ogma-sdk'],
 })
 
 console.log('Build complete.')

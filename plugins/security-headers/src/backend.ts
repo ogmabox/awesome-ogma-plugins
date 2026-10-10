@@ -2,7 +2,7 @@
 // Passively checks HTML responses for missing or weak security headers.
 // Creates a finding for each gap, deduplicated per header+host pair.
 
-import type { OgmaBackendSdk, HttpRequest, HttpResponse } from '@kaijinlab/ogma-sdk';
+import type { OgmaBackendSdk, HttpRequest, HttpResponse } from '@ogmabox/ogma-sdk';
 
 interface HeaderCheck {
   header: string;

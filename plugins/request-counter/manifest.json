@@ -5,7 +5,7 @@
   "description": "Counts intercepted HTTP requests. Reference plugin demonstrating the minimal Ogma plugin structure.",
   "author": {
     "name": "Ogma Plugins",
-    "url": "https://github.com/KaijinLab/awesome-ogma-plugins"
+    "url": "https://github.com/ogmabox/awesome-ogma-plugins"
   },
   "permissions": [
     "ui_extension"

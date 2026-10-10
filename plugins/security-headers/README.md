@@ -30,7 +30,7 @@ This plugin demonstrates the TypeScript + esbuild workflow for Ogma plugins.
 npm install
 ```
 
-Installs `@kaijinlab/ogma-sdk` (types), `esbuild` (bundler), and `typescript` (type checker).
+Installs `@ogmabox/ogma-sdk` (types), `esbuild` (bundler), and `typescript` (type checker).
 
 ### Type check
 
@@ -51,18 +51,18 @@ Produces `dist/backend.js` and `dist/frontend.js`. The manifest.json points at t
 `build.mjs` runs two esbuild invocations:
 
 ```javascript
-// Backend: IIFE bundle, @kaijinlab/ogma-sdk external (types only, no runtime code)
+// Backend: IIFE bundle, @ogmabox/ogma-sdk external (types only, no runtime code)
 await build({
   entryPoints: ['src/backend.ts'],
   outfile: 'dist/backend.js',
   bundle: true,
   format: 'iife',
-  external: ['@kaijinlab/ogma-sdk'],
+  external: ['@ogmabox/ogma-sdk'],
   platform: 'neutral',
 });
 ```
 
-The `external: ['@kaijinlab/ogma-sdk']` option tells esbuild not to bundle `@kaijinlab/ogma-sdk`. It is a types-only package with no runtime code -- the SDK globals are pre-registered by the Ogma runtime before your `init()` function is called.
+The `external: ['@ogmabox/ogma-sdk']` option tells esbuild not to bundle `@ogmabox/ogma-sdk`. It is a types-only package with no runtime code -- the SDK globals are pre-registered by the Ogma runtime before your `init()` function is called.
 
 The IIFE format wraps your module. To make `init` callable by the Ogma runtime, the plugin assigns it to `globalThis` at the end of `src/backend.ts`:
 
@@ -89,7 +89,7 @@ build.mjs         -- esbuild build script
 ### Typed SDK access
 
 ```typescript
-import type { OgmaBackendSdk, HttpRequest, HttpResponse } from '@kaijinlab/ogma-sdk';
+import type { OgmaBackendSdk, HttpRequest, HttpResponse } from '@ogmabox/ogma-sdk';
 
 async function init(sdk: OgmaBackendSdk): Promise<void> {
   sdk.events.onInterceptResponse(function (req: HttpRequest, resp?: HttpResponse) {

@@ -6,7 +6,7 @@ If you discover that a plugin in this registry is or has become malicious, repor
 
 1. Open a GitHub issue titled "Security: [plugin-id] -- suspected malicious plugin"
 2. Do not include the full exploit details in the public issue
-3. Email security@kaijinlab.com with the details (use "Ogma Plugin Security" in the subject)
+3. Email ask@ogmabox.com with the details (use "Ogma Plugin Security" in the subject)
 
 We aim to remove a confirmed malicious plugin from the registry within 24 hours of verification.
 
