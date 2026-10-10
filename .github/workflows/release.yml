@@ -16,7 +16,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 2
+          fetch-depth: 0
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
@@ -24,19 +24,35 @@ jobs:
           node-version: '24'
           node-version-file: '' # explicit version above, suppress file lookup
 
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v6
+        with:
+          version: 11.15.1
+
       - name: Detect plugins to release
         id: changed
+        env:
+          BEFORE_SHA: ${{ github.event.before }}
         run: |
-          # Plugins changed in this commit
-          FROM_GIT=$(git diff --name-only HEAD~1 HEAD -- 'plugins/**' | sed 's|plugins/||; s|/.*||' | sort -u | tr '\n' ' ')
+          # Cover every commit in the push; bootstrap all plugins on the first push.
+          if [ "$BEFORE_SHA" != "0000000000000000000000000000000000000000" ] && git cat-file -e "$BEFORE_SHA^{commit}" 2>/dev/null; then
+            FILES=$(git diff --name-only "$BEFORE_SHA" "$GITHUB_SHA" -- 'plugins/**')
+          else
+            FILES=$(git ls-files 'plugins/*/manifest.json')
+          fi
+          FROM_GIT=$(printf '%s\n' "$FILES" | sed 's|plugins/||; s|/.*||' | sort -u | tr '\n' ' ')
           # Plugins that still have sha256:pending in plugins.json (initial bootstrap)
           FROM_PENDING=$(node -e "
             const p = JSON.parse(require('fs').readFileSync('plugins.json','utf8'));
             const ids = p.plugins.filter(x => x.sha256 === 'pending').map(x => x.id).join(' ');
             process.stdout.write(ids);
           ")
-          # Merge and deduplicate
-          CHANGED=$(echo "$FROM_GIT $FROM_PENDING" | tr ' ' '\n' | sort -u | grep -v '^$' | tr '\n' ' ')
+          # Release registered plugins only, not the starter template.
+          CHANGED=$(FROM_GIT="$FROM_GIT" FROM_PENDING="$FROM_PENDING" node -e '
+            const registry = require("./plugins.json");
+            const changed = new Set((process.env.FROM_GIT + " " + process.env.FROM_PENDING).split(/\s+/));
+            process.stdout.write(registry.plugins.filter(p => changed.has(p.id)).map(p => p.id).sort().join(" "));
+          ')
           echo "plugins=$CHANGED" >> "$GITHUB_OUTPUT"
           echo "Changed plugins: $CHANGED"
 
@@ -60,9 +76,9 @@ jobs:
             echo "  Version: $VERSION"
 
             # Build TypeScript plugins
-            if [ -f "$PLUGIN_DIR/package.json" ] && [ -f "$PLUGIN_DIR/package-lock.json" ]; then
+            if [ -f "$PLUGIN_DIR/package.json" ]; then
               echo "  Building TypeScript..."
-              (cd "$PLUGIN_DIR" && npm ci --no-audit && npm run build)
+              (cd "$PLUGIN_DIR" && pnpm install --frozen-lockfile && pnpm typecheck && pnpm build)
             fi
 
             # Build ZIP
